@@ -20,10 +20,10 @@
 
   <!-- 页面元数据 -->
   
-    <title>Welcome to Lyjslay&#39;s Space</title>
+    <title>Welcom to lyjslay&#39;s Home</title>
   
   
-    <meta name="description" content="a space of colorful thoughts">
+    <meta name="description" content="lyjslay qq zone">
   
 
   <!-- feed -->
@@ -389,11 +389,11 @@
                       
             
               <li>
-                <a class="flat-box" href=https://github.com/xaoxuu/volantis-docs/
+                <a class="flat-box" href=https://github.com/lyjslay/lyjslay.github.io
                   
                   
                   
-                    id="https:githubcomxaoxuuvolantis-docs"
+                    id="https:githubcomlyjslaylyjslaygithubio"
                   >
                   看 本站源码
                 </a>
@@ -405,11 +405,11 @@
                       
             
               <li>
-                <a class="flat-box" href=https://github.com/xaoxuu/hexo-theme-volantis/issues/
+                <a class="flat-box" href=https://github.com/lyjslay/lyjslay.github.io/issues
                   
                   
                   
-                    id="https:githubcomxaoxuuhexo-theme-volantisissues"
+                    id="https:githubcomlyjslaylyjslaygithubioissues"
                   >
                   提 Issue
                 </a>
@@ -695,11 +695,11 @@
                       
             
               <li>
-                <a class="flat-box" href=https://github.com/xaoxuu/volantis-docs/
+                <a class="flat-box" href=https://github.com/lyjslay/lyjslay.github.io
                   
                   
                   
-                    id="https:githubcomxaoxuuvolantis-docs"
+                    id="https:githubcomlyjslaylyjslaygithubio"
                   >
                   看 本站源码
                 </a>
@@ -711,11 +711,11 @@
                       
             
               <li>
-                <a class="flat-box" href=https://github.com/xaoxuu/hexo-theme-volantis/issues/
+                <a class="flat-box" href=https://github.com/lyjslay/lyjslay.github.io/issues
                   
                   
                   
-                    id="https:githubcomxaoxuuhexo-theme-volantisissues"
+                    id="https:githubcomlyjslaylyjslaygithubioissues"
                   >
                   提 Issue
                 </a>
@@ -815,6 +815,8 @@
         
           
         
+          
+        
       
     
     
@@ -833,7 +835,125 @@
         
           
   <h2 class="title">
-    <a href="/2020/05/11/hello-world/">
+    <a href="/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2">
+      测试博客
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://xaoxuu.com" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png">
+    <p>lyjslay</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：May 17, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="3-系统原理"><a href="#3-系统原理" class="headerlink" title="3 系统原理"></a>3 系统原理</h1><h2 id="3-1系统硬件原理"><a href="#3-1系统硬件原理" class="headerlink" title="3.1系统硬件原理"></a>3.1系统硬件原理</h2><p>本系统采用RoboMaster开发板套件和RoboMaster GM6020。RoboMaster开发板套件内含有芯片STM32F427IIH6,该芯片最大总线频率达到168MHz,含有SPI,UART,I2C,CAN等多种扩展和通信接口，可为24V/12V/5V/3V等不同额定电压的外设供电，同时板载九轴惯导模块，集成度及可扩展度高，技术资料丰富。RoboMaster GM6020电机内部集成驱动器和编码器，机械时间常数较小，可快速响应指令动作，空转转速约为320rpm,额定转矩下最大调速可达132rpm，完全满足系统的小体积轻量云台对低速大扭矩的控制要求。另外内部集成的位置传感器反馈精度可达13bit和电机内部自带性能优越的电流环，使得高性能的GM6020电机成为本系统的驱动模块的不二之选。</p>
+<p><img src="C:%5CUsers%5Cbigboss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210301153530019.png" alt="image-20210301153530019"></p>
+<center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图3.系统下位机硬件原理</center> 
+
+<p>[1] RoboMaster 机甲大师赛[EB/OL].<a href="https://www.robomaster.com/zh-CN" target="_blank" rel="noopener">https://www.robomaster.com/zh-CN</a>.</p>
+<h2 id="3-2系统软件原理"><a href="#3-2系统软件原理" class="headerlink" title="3.2系统软件原理"></a>3.2系统软件原理</h2><p>本系统采用开源免费的FreeRTOS（实时操作系统）,可移植性强，满足系统实时性要求。因此本系统是基于FreeRTOS软件开发框架和STM32F427硬件处理器，通过STM32处理上位机指令驱动电机运转，以FreeRTOS为框架完成”一中断两任务”的需求设计。一中断指的是CAN接收中断机制，两任务指的是CAN报文发送任务、云台电机随动控制任务。</p>
+<p>STM32F427支持CAN协议2.0和2.0B主动模式，波特率可达1Mbit/s,，具有3个发送邮箱和3级深度的2个接收FIFO，CAN协议具有多主控制、通信距离远、速度快、错误检测、错误通知及恢复等功能。在本系统CAN协议通信中，通过已设置的不同ID区分上位机及两轴电机。GM6020电机CAN控制协议已由DJI厂商固定，开发者只需按照拨码开光设置的ID接收反馈的温度、电流、转速、绝对角度和发送转矩电流达到控制的目的。上位机的设备ID、报文格式均由上位机下位机双方软件设定。CAN协议为满足高速传输的同时保证每帧足够的数据位，每帧最长可8个字节，而本系统上下位机交互协议中每个数据报文设置为4字节，用于传输相机视野范围内yaw轴、pitch轴与目标偏差角度。具体协议内容如下：</p>
+<p>帧类型：标准帧；帧格式：DATA；DLC：4字节</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据域</th>
+<th align="center">DATA[0]</th>
+<th>DATA[1]</th>
+<th>DATA[2]</th>
+<th>DATA[3]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">内容</td>
+<td align="center">yaw轴偏转角高8位</td>
+<td>yaw轴偏转角低8位</td>
+<td>pitch轴偏转角高8位</td>
+<td>pitch轴偏转角低8位</td>
+</tr>
+</tbody></table>
+<p>云台电机随动控制任务是在手动遥控已达到稳定性强、精准度高、响应快的前提下，由上位机运算平台根据采集到的图像信息进行识别，得到目标在图像坐标系的位置偏差（包括yaw轴偏差角和pitch轴偏差角），以此偏差角度作为云台随动系统的输入信号，从而使得两轴云台的视觉随动效果实现，完成对VIN码的识别。</p>
+<p><img src="C:%5CUsers%5Cbigboss%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210301151326569.png" alt="image-20210301151326569"></p>
+<center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图4.云台随动控制任务原理</center> 
+[2] James Mistry,Matthew Naylor,Jim Woodcock.Adapting FreeRTOS for multicores: an experience report[J].Software: Practice and Experience,2014,44(9):1129-1154.
+
+<p>[3] 胡寿松.自动控制原理[M].北京：清华大学出版社，2014.</p>
+<p>[4] 朱耀麟，攀佩.基于FreeRTOS的嵌入式云台控制系统设计[J].电子技术应用，2015，41(5)：25-31.</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/uncategorized/hello-world">
       Hello World
     </a>
   </h2>
@@ -949,7 +1069,7 @@
         
         
         
-          <p><span id="jinrishici-sentence">Welcome to Lyjslay's Space</span></p>
+          <p><span id="jinrishici-sentence">Welcom to lyjslay's Home</span></p>
           <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
         
       </div>
@@ -1082,16 +1202,16 @@
       
     
       
-        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
       
-        本站使用
+        Use
         <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
-        作為主題，總訪問量為
+        as theme, total visits
           <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-          次
+          times
         
       
     
