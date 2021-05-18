@@ -1053,7 +1053,7 @@
 <h4 id="姿态解算与坐标变换"><a href="#姿态解算与坐标变换" class="headerlink" title="姿态解算与坐标变换"></a>姿态解算与坐标变换</h4><ul>
 <li>通过相机的标定方法获得相机的内参矩阵</li>
 <li>以装甲板的中心建立世界坐标系，采用PNP算法求解出相机的平移矩阵<script type="math/tex; mode=display">T=
-\begin{matrix} r\\ s\\ t\\ \end{matrix}</script>r、s、t表示装甲板中心与我方相机的相对位置。并根据 <script type="math/tex; mode=display">pitch = atan2(s,t+offset)</script><script type="math/tex; mode=display">yaw = atan2(r,t+offset)</script>求解出旋转角，进而控制云台转动.</li>
+\left[\begin{matrix} r\\ s\\ t\\ \end{matrix} \right]</script>r、s、t表示装甲板中心与我方相机的相对位置。并根据 <script type="math/tex; mode=display">pitch = atan2(s,t+offset)</script><script type="math/tex; mode=display">yaw = atan2(r,t+offset)</script>求解出旋转角，进而控制云台转动.</li>
 </ul>
 <h2 id="软件测试步骤"><a href="#软件测试步骤" class="headerlink" title="软件测试步骤"></a>软件测试步骤</h2><p>从百度网盘下载模型文件和测试视频(提取码：oza7)：<a href="https://pan.baidu.com/s/1fQlVAZpAcXy9H3WGko5rCA" target="_blank" rel="noopener">https://pan.baidu.com/s/1fQlVAZpAcXy9H3WGko5rCA</a> </p>
 <p><strong>test.avi放在./robomaster_detector下，robomaster_trt.pb放在./robomaster_detector/model_data下</strong></p>
