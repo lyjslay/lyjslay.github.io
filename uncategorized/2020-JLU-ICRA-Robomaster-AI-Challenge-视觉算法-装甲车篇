@@ -16,7 +16,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>测试博客 - Welcom to lyjslay&#39;s Home</title>
+    <title>2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇 - Welcom to lyjslay&#39;s Home</title>
   
   
 
@@ -727,8 +727,8 @@
         
           
   <h1 class="title">
-    <a href="/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2">
-      测试博客
+    <a href="/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87">
+      2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇
     </a>
   </h1>
 
@@ -758,7 +758,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 17, 2020</p>
+    <p>发布于：Aug 26, 2020</p>
   </a>
 </div>
 
@@ -781,33 +781,83 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <h1 id="3-系统原理"><a href="#3-系统原理" class="headerlink" title="3 系统原理"></a>3 系统原理</h1><h2 id="3-1系统硬件原理"><a href="#3-1系统硬件原理" class="headerlink" title="3.1系统硬件原理"></a>3.1系统硬件原理</h2><p>本系统采用RoboMaster开发板套件和RoboMaster GM6020。RoboMaster开发板套件内含有芯片STM32F427IIH6,该芯片最大总线频率达到168MHz,含有SPI,UART,I2C,CAN等多种扩展和通信接口，可为24V/12V/5V/3V等不同额定电压的外设供电，同时板载九轴惯导模块，集成度及可扩展度高，技术资料丰富。RoboMaster GM6020电机内部集成驱动器和编码器，机械时间常数较小，可快速响应指令动作，空转转速约为320rpm,额定转矩下最大调速可达132rpm，完全满足系统的小体积轻量云台对低速大扭矩的控制要求。另外内部集成的位置传感器反馈精度可达13bit和电机内部自带性能优越的电流环，使得高性能的GM6020电机成为本系统的驱动模块的不二之选。</p>
-<p>[1] RoboMaster 机甲大师赛[EB/OL].<a href="https://www.robomaster.com/zh-CN" target="_blank" rel="noopener">https://www.robomaster.com/zh-CN</a>.</p>
-<h2 id="3-2系统软件原理"><a href="#3-2系统软件原理" class="headerlink" title="3.2系统软件原理"></a>3.2系统软件原理</h2><p>本系统采用开源免费的FreeRTOS（实时操作系统）,可移植性强，满足系统实时性要求。因此本系统是基于FreeRTOS软件开发框架和STM32F427硬件处理器，通过STM32处理上位机指令驱动电机运转，以FreeRTOS为框架完成”一中断两任务”的需求设计。一中断指的是CAN接收中断机制，两任务指的是CAN报文发送任务、云台电机随动控制任务。</p>
-<p>STM32F427支持CAN协议2.0和2.0B主动模式，波特率可达1Mbit/s,，具有3个发送邮箱和3级深度的2个接收FIFO，CAN协议具有多主控制、通信距离远、速度快、错误检测、错误通知及恢复等功能。在本系统CAN协议通信中，通过已设置的不同ID区分上位机及两轴电机。GM6020电机CAN控制协议已由DJI厂商固定，开发者只需按照拨码开光设置的ID接收反馈的温度、电流、转速、绝对角度和发送转矩电流达到控制的目的。上位机的设备ID、报文格式均由上位机下位机双方软件设定。CAN协议为满足高速传输的同时保证每帧足够的数据位，每帧最长可8个字节，而本系统上下位机交互协议中每个数据报文设置为4字节，用于传输相机视野范围内yaw轴、pitch轴与目标偏差角度。具体协议内容如下：</p>
-<p>帧类型：标准帧；帧格式：DATA；DLC：4字节</p>
-<table>
-<thead>
-<tr>
-<th align="center">数据域</th>
-<th align="center">DATA[0]</th>
-<th>DATA[1]</th>
-<th>DATA[2]</th>
-<th>DATA[3]</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">内容</td>
-<td align="center">yaw轴偏转角高8位</td>
-<td>yaw轴偏转角低8位</td>
-<td>pitch轴偏转角高8位</td>
-<td>pitch轴偏转角低8位</td>
-</tr>
-</tbody></table>
-<p>云台电机随动控制任务是在手动遥控已达到稳定性强、精准度高、响应快的前提下，由上位机运算平台根据采集到的图像信息进行识别，得到目标在图像坐标系的位置偏差（包括yaw轴偏差角和pitch轴偏差角），以此偏差角度作为云台随动系统的输入信号，从而使得两轴云台的视觉随动效果实现，完成对VIN码的识别。</p>
-<p>[2] James Mistry,Matthew Naylor,Jim Woodcock.Adapting FreeRTOS for multicores: an experience report[J].Software: Practice and Experience,2014,44(9):1129-1154.</p>
-<p>[3] 胡寿松.自动控制原理[M].北京：清华大学出版社，2014.</p>
-<p>[4] 朱耀麟，攀佩.基于FreeRTOS的嵌入式云台控制系统设计[J].电子技术应用，2015，41(5)：25-31.</p>
+          <h1 id="Tars-Go-Robomaster装甲车视觉检测程序"><a href="#Tars-Go-Robomaster装甲车视觉检测程序" class="headerlink" title="Tars-Go Robomaster装甲车视觉检测程序"></a>Tars-Go Robomaster装甲车视觉检测程序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Robomaster-Detector&#x2F;</span><br><span class="line">├── detector.py                                 #目标检测检测类</span><br><span class="line">├── tracker.py                                  #视觉跟踪类</span><br><span class="line">├── armor_detection_node.py                     #ROS节点类</span><br><span class="line">├── gimble_ctrl.py                              #相机模型及云台控制</span><br><span class="line">├── README.md                                   #说明文档</span><br><span class="line">├── requirements.txt                            #python依赖模块</span><br><span class="line">├── test_video.mp4                              #测试视频</span><br><span class="line">├── KCF                                         #核相关滤波算法模块</span><br><span class="line">│   ├──build                                    #构建生成的pyhon模块</span><br><span class="line">│   ├──python                                   #python接口文件</span><br><span class="line">│   ├──src                                      #核相关滤波算法核心代码（C++）</span><br><span class="line">│   ├──run.py                                   #python接口测试代码</span><br><span class="line">│   ├──setup.py                                 #python模块构建代码</span><br><span class="line">├── data                                        #神经网络模型权重及配置文件</span><br><span class="line">│   ├── robomaster_trt.pb                       #神经网络权重文件</span><br><span class="line">│   ├── label_map.pbtxt                         #模型类别索引</span><br><span class="line">├── pics                                        #README中插入图片文件</span><br><span class="line">│   ├── left_detection_right_groudtruthx.png    #检测结果与标注对比</span><br><span class="line">│   ├── mAP.png                                 #模型平均精度</span><br><span class="line">│   ├── train_loss.png                          #模型训练损失</span><br><span class="line">│   ├── software_structure.svg                  #软件框架图</span><br><span class="line">│   ├── test_result.gif                         #测试效果动态图</span><br><span class="line">│   └──model_structure.png                      #模型结构图</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><ul>
+<li>Ubuntu16.04</li>
+<li>ROS Kinetic</li>
+<li>python3.5</li>
+<li>rospy</li>
+<li>TensorFlow==1.14(with contrib)</li>
+<li>numpy</li>
+<li>opencv</li>
+<li>multiprocessing</li>
+<li>threading</li>
+<li>Queue</li>
+<li>cv_bridge</li>
+<li>其他依赖模块详见./Robomaster_Detector/requirements.txt</li>
+</ul>
+<h2 id="整体介绍"><a href="#整体介绍" class="headerlink" title="整体介绍"></a>整体介绍</h2><p>本项目代码基于python语言和C++语言编写，采用UTF-8编码，符合python代码的风格规范。代码内容为机器人的视觉感知功能，主要是识别敌方机器人方位、敌方装甲板，精确测算敌方位置，并计算敌方相对于我方的位姿信息。</p>
+<ul>
+<li><p><strong>深度学习检测器（改进的SSD算法）</strong></p>
+</li>
+<li><p><strong>目标跟踪器（核相关滤波算法）</strong></p>
+</li>
+<li><p><strong>姿态解算与坐标变换模块（PNP算法）</strong></p>
+</li>
+</ul>
+<p>装甲车的视觉检测算法采用<strong>基于深度学习的目标检测器+基于核相关滤波算法的目标跟踪器</strong>的模式。</p>
+<p>深度学习部分采用改进的SSD目标检测算法，以Googlenet为模型的主干，并消去了用于检测极小目标的分支、并利用模型剪枝技术以提升检测速度。同时，以并行的方式、采用核相关滤波算法对装甲板这一目标进行跟踪，辅助深度学习算法，弥补检测速度上的不足。</p>
+<p>采用这样的模式，既可以实现深度学习算法强大的目标检测能力和抗干扰能力，又可以实现较高的实时性。经测试，该算法的平均检测速度可达到80FPS(12.5ms/frame)，满足机器人精确打击的需求。</p>
+<ul>
+<li>软件架构与数据流如下图所示：<br><img src="E:/Robomaster_Detector_JLU/pic/software.png" alt="software"><br><img src="E:/Robomaster_Detector_JLU/pic/software_structure.svg" alt="software_structure"></li>
+</ul>
+<h3 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h3><h4 id="深度学习检测器"><a href="#深度学习检测器" class="headerlink" title="深度学习检测器"></a>深度学习检测器</h4><ul>
+<li><p>采用改进的SSD目标检测算法，输入为300*300的RGB图，输出BoundingBox的位置、类别和置信度.</p>
+</li>
+<li><p>检测目标分为七个类别：红色装甲板(red)、蓝色装甲板(blue)、装甲车前方(front)、装甲车后方(back)、装甲车左方(left)、装甲车(right)、装甲车斜方(tracking).</p>
+</li>
+<li><p>模型训练的loss及mAP：</p>
+<p><img src="E:/Robomaster_Detector_JLU/pic/train_loss.png" alt="train_loss"></p>
+<p><img src="E:/Robomaster_Detector_JLU/pic/mAP.png" alt="mAP"></p>
+</li>
+<li><p>网络结构图(删除了小目标预测分支)：</p>
+<p><img src="E:/Robomaster_Detector_JLU/pic/model_structure.png" alt="model_structure"></p>
+</li>
+<li><p>效果图（左边为检测结果，右边为标注结果）</p>
+<p><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth1.png" alt="left_detection_right_groudtruth1"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth2.png" alt="left_detection_right_groudtruth2"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth3.png" alt="left_detection_right_groudtruth3"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth4.png" alt="left_detection_right_groudtruth4"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth5.png" alt="left_detection_right_groudtruth5"></p>
+</li>
+</ul>
+<h4 id="目标跟踪器"><a href="#目标跟踪器" class="headerlink" title="目标跟踪器"></a>目标跟踪器</h4><ul>
+<li>采用核相关滤波算法，仅对敌方装甲板这一目标进行跟踪，以弥补深度学习算法检测速度的不足.</li>
+<li>算法流程图<br><img src="E:/Robomaster_Detector_JLU/pic/tracker.png" alt="image-20200824135610905"></li>
+</ul>
+<h4 id="姿态解算与坐标变换"><a href="#姿态解算与坐标变换" class="headerlink" title="姿态解算与坐标变换"></a>姿态解算与坐标变换</h4><ul>
+<li>通过相机的标定方法获得相机的内参矩阵</li>
+<li>以装甲板的中心建立世界坐标系，采用PNP算法求解出相机的平移矩阵<br>$$T=<br>\left[<br>\begin{matrix}<br>  r\<br>  s\<br>  t\<br>\end{matrix}<br>\right]<br>$$<br>r、s、t表示装甲板中心与我方相机的相对位置。并根据<br>$$pitch = atan2(s,t+offset)$$<br>$$yaw = atan2(r,t+offset)$$<br>求解出旋转角，进而控制云台转动.</li>
+</ul>
+<h2 id="软件测试步骤"><a href="#软件测试步骤" class="headerlink" title="软件测试步骤"></a>软件测试步骤</h2><p>从百度网盘下载模型文件和测试视频(提取码：oza7)：<a href="https://pan.baidu.com/s/1fQlVAZpAcXy9H3WGko5rCA" target="_blank" rel="noopener">https://pan.baidu.com/s/1fQlVAZpAcXy9H3WGko5rCA</a> </p>
+<p><strong>test.avi放在./robomaster_detector下，robomaster_trt.pb放在./robomaster_detector/model_data下</strong></p>
+<h3 id="单独测试深度学习目标检测功能"><a href="#单独测试深度学习目标检测功能" class="headerlink" title="单独测试深度学习目标检测功能"></a>单独测试深度学习目标检测功能</h3><ul>
+<li>运行<code>pip install -r requirements.txt</code>安装相关依赖</li>
+<li>在./Robomaster_Detector目录下，运行<code>python detector.py</code></li>
+</ul>
+<h3 id="单独测试目标跟踪算法功能"><a href="#单独测试目标跟踪算法功能" class="headerlink" title="单独测试目标跟踪算法功能"></a>单独测试目标跟踪算法功能</h3><ul>
+<li>在./Robomaster_Detector/KCF目录下，运行<code>python setup.py build_ext --inplace</code></li>
+<li>在./Robomaster_Detector目录下，运行<code>python tracker.py</code></li>
+<li>用鼠标框选要跟踪的装甲板即可</li>
+</ul>
+<h3 id="ROS下armor-detection节点的综合测试"><a href="#ROS下armor-detection节点的综合测试" class="headerlink" title="ROS下armor_detection节点的综合测试"></a>ROS下armor_detection节点的综合测试</h3><ul>
+<li>利用virtualenv建立python3虚拟环境，并安装tensorflow、opencv-python等依赖</li>
+<li>基于Python3、从ROS Kinetic源码编译ROS</li>
+<li>基于python3、从源码编译cv_bridge、tf等rospackages</li>
+<li>基于python3编译EnemyDirection.msg、GimbalAngle.msg两个消息文件和ShootCmd.srv、FricWhl.srv两个服务文件</li>
+<li>在./Robomaster_Detector目录下，运行<code>python armor_detection_node.py</code></li>
+</ul>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="E:/Robomaster_Detector_JLU/pic/result.gif" alt="test_result"></p>
+<h2 id="开源协议"><a href="#开源协议" class="headerlink" title="开源协议"></a>开源协议</h2><p>MIT License</p>
 
           
             <div class='article_footer'>
@@ -844,7 +894,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://lyjslay.github.io/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2>http://lyjslay.github.io/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2</a></p>
+            <p>本文永久链接是：<a href=http://lyjslay.github.io/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87>http://lyjslay.github.io/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87</a></p>
           
         
       </blockquote>
@@ -895,10 +945,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-17T22:04:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-18T17:09:54+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 17, 2021</p>
+    <p>更新于：May 18, 2021</p>
   </a>
 </div>
 
@@ -922,7 +972,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://lyjslay.github.io/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2&title=测试博客 - Welcom to lyjslay's Home&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://lyjslay.github.io/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87&title=2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇 - Welcom to lyjslay's Home&summary="
           
           >
           
@@ -934,7 +984,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lyjslay.github.io/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2&title=测试博客 - Welcom to lyjslay's Home&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lyjslay.github.io/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87&title=2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇 - Welcom to lyjslay's Home&summary="
           
           >
           
@@ -946,7 +996,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://lyjslay.github.io/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2&title=测试博客 - Welcom to lyjslay's Home&summary="
+          href="http://service.weibo.com/share/share.php?url=http://lyjslay.github.io/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87&title=2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇 - Welcom to lyjslay's Home&summary="
           
           >
           
@@ -970,15 +1020,10 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇</p>
-                <p class='content'>Tars-Go Robomaster装甲车视觉检测程序123456789101112131415161718192021222324Robomaster-Detector&#x2F;├── de...</p>
-              </a>
             
-            
-              <a class='next' href='/uncategorized/hello-world'>
-                <p class='title'>Hello World<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ...</p>
+              <a class='next' href='/uncategorized/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2'>
+                <p class='title'>测试博客<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>3 系统原理3.1系统硬件原理本系统采用RoboMaster开发板套件和RoboMaster GM6020。RoboMaster开发板套件内含有芯片STM32F427IIH6,该芯片最大总线频率...</p>
               </a>
             
           </div>
@@ -1023,7 +1068,7 @@
 
   <script>
     window.subData = {
-      title: '测试博客',
+      title: '2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇',
       tools: true
     }
   </script>
@@ -1049,7 +1094,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1系统硬件原理"><span class="toc-text">3.1系统硬件原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2系统软件原理"><span class="toc-text">3.2系统软件原理</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整体介绍"><span class="toc-text">整体介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块介绍"><span class="toc-text">模块介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#深度学习检测器"><span class="toc-text">深度学习检测器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#目标跟踪器"><span class="toc-text">目标跟踪器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#姿态解算与坐标变换"><span class="toc-text">姿态解算与坐标变换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件测试步骤"><span class="toc-text">软件测试步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单独测试深度学习目标检测功能"><span class="toc-text">单独测试深度学习目标检测功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单独测试目标跟踪算法功能"><span class="toc-text">单独测试目标跟踪算法功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROS下armor-detection节点的综合测试"><span class="toc-text">ROS下armor_detection节点的综合测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试结果"><span class="toc-text">测试结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开源协议"><span class="toc-text">开源协议</span></a></li></ol>
     </div>
   </section>
 
