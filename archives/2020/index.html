@@ -923,7 +923,7 @@
 <p>深度学习部分采用改进的SSD目标检测算法，以Googlenet为模型的主干，并消去了用于检测极小目标的分支、并利用模型剪枝技术以提升检测速度。同时，以并行的方式、采用核相关滤波算法对装甲板这一目标进行跟踪，辅助深度学习算法，弥补检测速度上的不足。</p>
 <p>采用这样的模式，既可以实现深度学习算法强大的目标检测能力和抗干扰能力，又可以实现较高的实时性。经测试，该算法的平均检测速度可达到80FPS(12.5ms/frame)，满足机器人精确打击的需求。</p>
 <ul>
-<li>软件架构与数据流如下图所示：<br><img src="E:/Robomaster_Detector_JLU/pic/software.png" alt="software"><br><img src="E:/Robomaster_Detector_JLU/pic/software_structure.svg" alt="software_structure"></li>
+<li>软件架构与数据流如下图所示：<br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/software.png" alt="software"><br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/software_structure.svg" alt="software_structure"></li>
 </ul>
 <h3 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h3><h4 id="深度学习检测器"><a href="#深度学习检测器" class="headerlink" title="深度学习检测器"></a>深度学习检测器</h4><ul>
 <li><p>采用改进的SSD目标检测算法，输入为300*300的RGB图，输出BoundingBox的位置、类别和置信度.</p>
@@ -931,23 +931,23 @@
 <li><p>检测目标分为七个类别：红色装甲板(red)、蓝色装甲板(blue)、装甲车前方(front)、装甲车后方(back)、装甲车左方(left)、装甲车(right)、装甲车斜方(tracking).</p>
 </li>
 <li><p>模型训练的loss及mAP：</p>
-<p><img src="E:/Robomaster_Detector_JLU/pic/train_loss.png" alt="train_loss"></p>
-<p><img src="E:/Robomaster_Detector_JLU/pic/mAP.png" alt="mAP"></p>
+<p><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/train_loss.png" alt="train_loss"></p>
+<p><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/mAP.png" alt="mAP"></p>
 </li>
 <li><p>网络结构图(删除了小目标预测分支)：</p>
-<p><img src="E:/Robomaster_Detector_JLU/pic/model_structure.png" alt="model_structure"></p>
+<p><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/model_structure.png" alt="model_structure"></p>
 </li>
 <li><p>效果图（左边为检测结果，右边为标注结果）</p>
-<p><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth1.png" alt="left_detection_right_groudtruth1"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth2.png" alt="left_detection_right_groudtruth2"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth3.png" alt="left_detection_right_groudtruth3"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth4.png" alt="left_detection_right_groudtruth4"><br><img src="E:/Robomaster_Detector_JLU/pic/left_detection_right_groudtruth5.png" alt="left_detection_right_groudtruth5"></p>
+<p><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/left_detection_right_groudtruth1.png" alt="left_detection_right_groudtruth1"><br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/left_detection_right_groudtruth2.png" alt="left_detection_right_groudtruth2"><br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/left_detection_right_groudtruth3.png" alt="left_detection_right_groudtruth3"><br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/left_detection_right_groudtruth4.png" alt="left_detection_right_groudtruth4"><br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/left_detection_right_groudtruth5.png" alt="left_detection_right_groudtruth5"></p>
 </li>
 </ul>
 <h4 id="目标跟踪器"><a href="#目标跟踪器" class="headerlink" title="目标跟踪器"></a>目标跟踪器</h4><ul>
 <li>采用核相关滤波算法，仅对敌方装甲板这一目标进行跟踪，以弥补深度学习算法检测速度的不足.</li>
-<li>算法流程图<br><img src="E:/Robomaster_Detector_JLU/pic/tracker.png" alt="image-20200824135610905"></li>
+<li>算法流程图<br><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/tracker.png" alt="image-20200824135610905"></li>
 </ul>
 <h4 id="姿态解算与坐标变换"><a href="#姿态解算与坐标变换" class="headerlink" title="姿态解算与坐标变换"></a>姿态解算与坐标变换</h4><ul>
 <li>通过相机的标定方法获得相机的内参矩阵</li>
-<li>以装甲板的中心建立世界坐标系，采用PNP算法求解出相机的平移矩阵<br>$$T=<br>\left[<br>\begin{matrix}<br>  r\<br>  s\<br>  t\<br>\end{matrix}<br>\right]<br>$$<br>r、s、t表示装甲板中心与我方相机的相对位置。并根据<br>$$pitch = atan2(s,t+offset)$$<br>$$yaw = atan2(r,t+offset)$$<br>求解出旋转角，进而控制云台转动.</li>
+<li>以装甲板的中心建立世界坐标系，采用PNP算法求解出相机的平移矩阵<br>$$T=\left[\begin{matrix} r\ s\ t\ \end{matrix} \right]$$<br>r、s、t表示装甲板中心与我方相机的相对位置。并根据<br>$$pitch = atan2(s,t+offset)$$<br>$$yaw = atan2(r,t+offset)$$<br>求解出旋转角，进而控制云台转动.</li>
 </ul>
 <h2 id="软件测试步骤"><a href="#软件测试步骤" class="headerlink" title="软件测试步骤"></a>软件测试步骤</h2><p>从百度网盘下载模型文件和测试视频(提取码：oza7)：<a href="https://pan.baidu.com/s/1fQlVAZpAcXy9H3WGko5rCA" target="_blank" rel="noopener">https://pan.baidu.com/s/1fQlVAZpAcXy9H3WGko5rCA</a> </p>
 <p><strong>test.avi放在./robomaster_detector下，robomaster_trt.pb放在./robomaster_detector/model_data下</strong></p>
@@ -967,7 +967,7 @@
 <li>基于python3编译EnemyDirection.msg、GimbalAngle.msg两个消息文件和ShootCmd.srv、FricWhl.srv两个服务文件</li>
 <li>在./Robomaster_Detector目录下，运行<code>python armor_detection_node.py</code></li>
 </ul>
-<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="E:/Robomaster_Detector_JLU/pic/result.gif" alt="test_result"></p>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://github.com/lyjslay/Robomaster-2020-Tars-Go-Vision/tree/master/pic/result.gif" alt="test_result"></p>
 <h2 id="开源协议"><a href="#开源协议" class="headerlink" title="开源协议"></a>开源协议</h2><p>MIT License</p>
 
       
