@@ -808,12 +808,12 @@
 	    <section class="archive">
 	      
 	          <div class="archive-item archive-year mark">
-	            <h2>2020</h2>
+	            <h2>2021</h2>
 	          </div>
 	      
 	          <div class="archive-item archive-post mark">
 	            <a href="/uncategorized/2020-JLU-ICRA-Robomaster-AI-Challenge-%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95-%E8%A3%85%E7%94%B2%E8%BD%A6%E7%AF%87">
-	              <time>08-26</time>
+	              <time>05-18</time>
 	              <span class="title">
 	                
 	                  2020 JLU ICRA-Robomaster AI Challenge 视觉算法-装甲车篇
@@ -823,6 +823,10 @@
 									
 	              </span>
 	            </a>
+	          </div>
+	      
+	          <div class="archive-item archive-year mark">
+	            <h2>2020</h2>
 	          </div>
 	      
 	          <div class="archive-item archive-post mark">
@@ -933,22 +937,6 @@
   
     
     
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/CV/" style="font-size: 14px; color: #999">CV</a>
-    </div>
-  </section>
-
 
   
 
@@ -1055,60 +1043,6 @@
 
 	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
 	
-
-	
-	    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js"></script>
-<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
 	
 
