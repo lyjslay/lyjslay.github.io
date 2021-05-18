@@ -786,24 +786,28 @@
 <h2 id="3-2系统软件原理"><a href="#3-2系统软件原理" class="headerlink" title="3.2系统软件原理"></a>3.2系统软件原理</h2><p>本系统采用开源免费的FreeRTOS（实时操作系统）,可移植性强，满足系统实时性要求。因此本系统是基于FreeRTOS软件开发框架和STM32F427硬件处理器，通过STM32处理上位机指令驱动电机运转，以FreeRTOS为框架完成”一中断两任务”的需求设计。一中断指的是CAN接收中断机制，两任务指的是CAN报文发送任务、云台电机随动控制任务。</p>
 <p>STM32F427支持CAN协议2.0和2.0B主动模式，波特率可达1Mbit/s,，具有3个发送邮箱和3级深度的2个接收FIFO，CAN协议具有多主控制、通信距离远、速度快、错误检测、错误通知及恢复等功能。在本系统CAN协议通信中，通过已设置的不同ID区分上位机及两轴电机。GM6020电机CAN控制协议已由DJI厂商固定，开发者只需按照拨码开光设置的ID接收反馈的温度、电流、转速、绝对角度和发送转矩电流达到控制的目的。上位机的设备ID、报文格式均由上位机下位机双方软件设定。CAN协议为满足高速传输的同时保证每帧足够的数据位，每帧最长可8个字节，而本系统上下位机交互协议中每个数据报文设置为4字节，用于传输相机视野范围内yaw轴、pitch轴与目标偏差角度。具体协议内容如下：</p>
 <p>帧类型：标准帧；帧格式：DATA；DLC：4字节</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">数据域</th>
-<th align="center">DATA[0]</th>
+<th style="text-align:center">数据域</th>
+<th style="text-align:center">DATA[0]</th>
 <th>DATA[1]</th>
 <th>DATA[2]</th>
 <th>DATA[3]</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">内容</td>
-<td align="center">yaw轴偏转角高8位</td>
+<tbody>
+<tr>
+<td style="text-align:center">内容</td>
+<td style="text-align:center">yaw轴偏转角高8位</td>
 <td>yaw轴偏转角低8位</td>
 <td>pitch轴偏转角高8位</td>
 <td>pitch轴偏转角低8位</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>云台电机随动控制任务是在手动遥控已达到稳定性强、精准度高、响应快的前提下，由上位机运算平台根据采集到的图像信息进行识别，得到目标在图像坐标系的位置偏差（包括yaw轴偏差角和pitch轴偏差角），以此偏差角度作为云台随动系统的输入信号，从而使得两轴云台的视觉随动效果实现，完成对VIN码的识别。</p>
 <p>[2] James Mistry,Matthew Naylor,Jim Woodcock.Adapting FreeRTOS for multicores: an experience report[J].Software: Practice and Experience,2014,44(9):1129-1154.</p>
 <p>[3] 胡寿松.自动控制原理[M].北京：清华大学出版社，2014.</p>
